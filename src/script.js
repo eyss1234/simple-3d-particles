@@ -20,6 +20,7 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
+const particleTexture = textureLoader.load('/textures/particles/5.png')
 
 /**
  * Particle
@@ -41,14 +42,20 @@ particlesGeometry.setAttribute(
 
 // Material
 const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.01,
-    sizeAttenuation: true
+    size: 0.03,
+    sizeAttenuation: true,
+    transparent: true,
+    color: '#ff88cc',
+    alphaMap: particleTexture,
+    // alphaTest: 0.001
+    // depthTest: false
+    depthWrite: false,
+    // blending: THREE.AdditiveBlending
 })
 
 // Points
 const particles = new THREE.Points(particlesGeometry, particlesMaterial)
 scene.add(particles)
-
 
 /**
  * Sizes
