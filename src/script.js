@@ -20,7 +20,7 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const particleTexture = textureLoader.load('/textures/particles/5.png')
+const particleTexture = textureLoader.load('/textures/particles/1.png')
 
 /**
  * Particle
@@ -119,6 +119,18 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // Update particles
+    // particles.position.y = - elapsedTime * 0.2
+    for(let i = 0; i < count; i++){
+        
+        const i3 = i * 3
+        const x = particlesGeometry.attributes.position.array[i3]
+
+        particlesGeometry.attributes.position.array[i3 + 1] = Math.sin(elapsedTime + x) 
+    }
+
+    particlesGeometry.attributes.position.needsUpdate = true
 
     // Update controls
     controls.update()
